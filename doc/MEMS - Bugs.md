@@ -85,6 +85,10 @@ Once you get the details,
   - `git add .` OR `git add <file1> <file2> ....`
   - `git status` - to verify that all the files being untracked are now tracked and nothing is left out.
   - `git commit -m <MeaningfulCommitMessage>`
+  - `git log --oneline` to verify the commit in the bugfix branch
+  - `git checkout main` && `git log --oneline` - switch over to the `main` branch once and see the log if you want.
+  > There will be obvious differences as the commit what was made in the `bugfix` branch will NOT be visible in the `main` branch.
+
 * Its time to push to the remote repo.
 * Create a *Remote* bugfix branch in the Remote Repository - from the remote `main` branch OR a `feature` branch in Remote.
 * Add a link to the remote bugfix branch for the local bugfix branch
@@ -153,6 +157,35 @@ java.sql.SQLIntegrityConstraintViolationException: Duplicate entry 'theju@3' for
 	at com.assignments.java.mems.web.RegisterServlet.doPost(RegisterServlet.java:61)
 	at javax.servlet.http.HttpServlet.service(HttpServlet.java:681)
 	at javax.servlet.http.HttpServlet.service(HttpServlet.java:764)
+```
+
+## Console Logs
+
+```sh
+➜  mini-project-mems git:(bugfix/MEMS-14_DuplicateUsersHandling) git checkout main
+Switched to branch 'main'
+Your branch is up to date with 'origin/main'.
+➜  mini-project-mems git:(main) git log --oneline
+➜  mini-project-mems git:(main) ✗ git log --oneline
+
+2c0769c (HEAD -> main, origin/main, origin/HEAD) Merge pull request #1 from raghsonlinedotcom/MEMS-1-SignUp
+2879e8b (origin/MEMS-1-SignUp) MEMS-11 | SignUp - UI changes
+281e6a0 MEMS-12 | SignUp - Backend changes
+fa3e7e4 MEMS-10 | DB Design Completed
+df647e7 Initial commit
+(END)
+```
+
+```sh
+➜  doc git:(bugfix/MEMS-14_DuplicateUsersHandling) ✗ git log --oneline
+
+36c80ed (HEAD -> bugfix/MEMS-14_DuplicateUsersHandling) MEMS-14 | Bug fixed - Dupliate Users Handling
+2c0769c (origin/main, origin/HEAD, main) Merge pull request #1 from raghsonlinedotcom/MEMS-1-SignUp
+2879e8b (origin/MEMS-1-SignUp) MEMS-11 | SignUp - UI changes
+281e6a0 MEMS-12 | SignUp - Backend changes
+fa3e7e4 MEMS-10 | DB Design Completed
+df647e7 Initial commit
+(END)
 ```
 
 ## Open Issues
