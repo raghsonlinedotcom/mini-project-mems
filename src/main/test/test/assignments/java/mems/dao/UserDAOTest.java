@@ -3,8 +3,6 @@
  */
 package test.assignments.java.mems.dao;
 
-import java.sql.SQLException;
-
 import com.assignments.java.mems.bo.UserBO;
 import com.assignments.java.mems.dao.UserDAO;
 import com.assignments.java.mems.dao.UserDAOImpl;
@@ -29,11 +27,11 @@ public class UserDAOTest {
 		
 		try {
 			userDAO.registerUser(userBO);
-		} catch (SQLException sqlException) {
+		} catch (Exception exception) {
 			System.err.println("Exception while obtaining a connection");
-			System.err.println("Error Message : " + sqlException.getMessage());
+			System.err.println("Error Message : " + exception.getMessage());
 			//TODO ONLY for Development Purposes, remove it in PROD
-			sqlException.printStackTrace();
+			exception.printStackTrace();
 		}
 	}
 
