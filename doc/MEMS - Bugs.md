@@ -187,6 +187,76 @@ fa3e7e4 MEMS-10 | DB Design Completed
 df647e7 Initial commit
 (END)
 ```
+## Remote Branch
+
+`https://github.com/raghsonlinedotcom/mini-project-mems/tree/MEMS-14_DuplicateUsersHandling`
+
+```sh
+➜  doc git:(bugfix/MEMS-14_DuplicateUsersHandling) git status
+On branch bugfix/MEMS-14_DuplicateUsersHandling
+nothing to commit, working tree clean
+➜  doc git:(bugfix/MEMS-14_DuplicateUsersHandling) git pull
+From github.com:raghsonlinedotcom/mini-project-mems
+ * [new branch]      MEMS-14_DuplicateUsersHandling -> origin/MEMS-14_DuplicateUsersHandling
+There is no tracking information for the current branch.
+Please specify which branch you want to merge with.
+See git-pull(1) for details.
+
+    git pull <remote> <branch>
+
+If you wish to set tracking information for this branch you can do so with:
+
+    git branch --set-upstream-to=origin/<branch> bugfix/MEMS-14_DuplicateUsersHandling
+
+➜  doc git:(bugfix/MEMS-14_DuplicateUsersHandling) ✗
+```
+
+Verify the remote branch in the local repository.
+
+```sh
+➜  doc git:(bugfix/MEMS-14_DuplicateUsersHandling) ✗ git branch -a                       
+
+* bugfix/MEMS-14_DuplicateUsersHandling
+  main
+  remotes/origin/HEAD -> origin/main
+  remotes/origin/MEMS-1-SignUp
+  remotes/origin/MEMS-14_DuplicateUsersHandling
+  remotes/origin/main
+(END)
+```
+
+```sh
+➜  doc git:(bugfix/MEMS-14_DuplicateUsersHandling) ✗ git branch --set-upstream-to=origin/MEMS-14_DuplicateUsersHandling bugfix/MEMS-14_DuplicateUsersHandling
+branch \'bugfix/MEMS-14_DuplicateUsersHandling\' set up to track \'origin/MEMS-14_DuplicateUsersHandling\'.
+➜  doc git:(bugfix/MEMS-14_DuplicateUsersHandling) ✗ git push
+fatal: The upstream branch of your current branch does not match
+the name of your current branch.  To push to the upstream branch
+on the remote, use
+
+    git push origin HEAD:MEMS-14_DuplicateUsersHandling
+
+To push to the branch of the same name on the remote, use
+
+    git push origin HEAD
+
+To choose either option permanently, see push.default in \'git help config\'.
+
+To avoid automatically configuring upstream branches when their name
+doesn\'t match the local branch, see option \'simple\' of branch.autoSetupMerge
+in \'git help config\'.
+
+➜  doc git:(bugfix/MEMS-14_DuplicateUsersHandling) ✗ git push origin HEAD:MEMS-14_DuplicateUsersHandling
+Enumerating objects: 50, done.
+Counting objects: 100% (50/50), done.
+Delta compression using up to 8 threads
+Compressing objects: 100% (21/21), done.
+Writing objects: 100% (32/32), 11.88 KiB | 5.94 MiB/s, done.
+Total 32 (delta 7), reused 0 (delta 0), pack-reused 0
+remote: Resolving deltas: 100% (7/7), completed with 4 local objects.
+To github.com:raghsonlinedotcom/mini-project-mems.git
+   2c0769c..31a706d  HEAD -> MEMS-14_DuplicateUsersHandling
+➜  doc git:(bugfix/MEMS-14_DuplicateUsersHandling) ✗
+```
 
 ## Open Issues
 
