@@ -47,6 +47,14 @@ public class RegisterServlet extends HttpServlet {
 		String userName = String.valueOf(request.getParameter("userName"));
 		String password = String.valueOf(request.getParameter("password"));
 		
+		/* Validate the parameters */
+		if(null==firstName || firstName.trim().length()>20) {
+			request.setAttribute("errorMsg", "First Name can contain a max of 20 chars");
+			request.setAttribute("firstName", firstName);
+			request.getRequestDispatcher("register.jsp").forward(request, response);
+			return;
+		}
+		
 		//2. Prepare the BO object
 		UserBO userBO = new UserBO(firstName, lastName, userName, password);
 		System.out.println("UserBO : " + userBO);
@@ -55,36 +63,62 @@ public class RegisterServlet extends HttpServlet {
 		UserDAO userDAO = new UserDAOImpl();
 		int lastInsertedId = -1;
 		String errorMsg = null;
-		Exception exception = null;
+		Exception exceptionObj = null;
+		/* MEMS-18, MEMS-19 */
+		int sqlErrorCode = -1;
+		String sqlState = null;
+		
+		boolean isError = false;
 		
 		try {
 			lastInsertedId = userDAO.registerUser(userBO);
-		} catch (SQLException sqlException) {
-			System.err.println("Exception while registering the User");
-			errorMsg = sqlException.getMessage();
-			System.err.println("Error Message : " + errorMsg);
-			System.err.println("Error Code : " +sqlException.getErrorCode());
-			System.err.println("SQL State : " +sqlException.getSQLState());
-			//TODO ONLY for Development Purposes, remove it in PROD
-			sqlException.printStackTrace();
-			exception = sqlException;
-			
+		} catch(ClassNotFoundException classNotFoundException) { /* MEMS-18, MEMS-19 */
+			isError = true;
+			exceptionObj = classNotFoundException;				
+		} catch (SQLException sqlException) {  /* MEMS-18, MEMS-19 */
+			isError = true;
+			exceptionObj = sqlException;
+			sqlErrorCode = sqlException.getErrorCode();
+			sqlState = sqlException.getSQLState();
+		} catch (Exception exception) {
+			isError = true;			
+			exceptionObj = exception;			
 		}
-		System.out.println("Last Inserted Id : " +lastInsertedId);
+		
+		/* Handling the error - at once in common for all the different types */
+		/* MEMS-18, MEMS-19 */
+		if(isError) 
+		{
+			System.err.println("Exception while registering the User");
+			errorMsg = exceptionObj.getMessage();
+			System.err.println("Error Message : " + errorMsg);	
+			if(exceptionObj instanceof SQLException) {
+				System.err.println("Error Code : " + sqlErrorCode);
+				System.err.println("SQL State : " + sqlState);
+			}
+			//TODO ONLY for Development Purposes, remove it in PROD
+			exceptionObj.printStackTrace();
+		}
 		
 		//------ MEMS-14 - BugFix - START ----
 		String message = null;
+		
 		if(lastInsertedId<=0) { /* Error */
 			message = "Error while registering the User. "; 
-			if(exception instanceof SQLIntegrityConstraintViolationException ) {
+			
+			if(exceptionObj instanceof ClassNotFoundException) {
+				message = "Error connecting with the Database. Please contact Admin.";
+			} else if(exceptionObj instanceof SQLIntegrityConstraintViolationException ) {
 				message = message + "User already exists";
 			} else {
 				message = message + " Reason : " + errorMsg;
-			}
-			
-		} else {
+			}			
+		} else { /* Success */ 
 			message = "Registration successful. Your User Id : " + lastInsertedId;
 		}
+		
+		System.out.println("Last Inserted Id : " +lastInsertedId);
+		
 		response.getWriter().println(message);
 		//----- MEMS-14 - BugFix - END ------
 	}
