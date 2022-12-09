@@ -1,11 +1,9 @@
 package com.assignments.java.mems.dao;
 
-import java.sql.SQLException;
-
 import com.assignments.java.mems.bo.UserBO;
 
 public interface UserDAO {
 	
-	public abstract int registerUser(UserBO userBO) throws SQLException;
+	public abstract int registerUser(UserBO userBO) throws Exception;
 
 }

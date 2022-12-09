@@ -8,6 +8,18 @@
 	</head>
 	<body>
 		<h1>Sign Up</h1>
+		<%!
+			boolean isError = false;
+			String firstName = "Thejaswini";
+		%>
+		<%
+			String errorMsg = (String) request.getAttribute("errorMsg");
+			
+			if(null!=errorMsg) {
+				isError = true;
+				firstName = (String) request.getAttribute("firstName");				
+			}
+		%>
 		<form name="signUpForm" action="register" method="post">
 			<table border="1">
 				<thead>
@@ -23,7 +35,19 @@
 						</td>
 						<td>
 							<input id="firstName" type="text" name="firstName" size="20" 
-								required placeholder="First Name" value="Thejaswini"/>
+								placeholder="First Name" 
+								value="<%= firstName %>"
+								 required/>
+							<%
+								if(isError) {
+							%>
+								<br/>
+								<span style="background-color:yellow; color:red; weight: bold;">
+										<%= errorMsg %>
+								</span>
+							<%
+								}
+							%>
 						</td>
 					</tr>
 					<tr>
@@ -32,7 +56,8 @@
 						</td>
 						<td>
 							<input id="lastName" type="text" name="lastName" size="20" 
-								required placeholder="Last Name" value="RN"/>
+							 	placeholder="Last Name" value="RN"
+							 	maxlength="20" required/>
 						</td>
 					</tr>
 					<tr>
@@ -41,7 +66,8 @@
 						</td>
 						<td>
 							<input id="userName" type="text" name="userName" size="20" 
-								required placeholder="Unique userName" value="theju@3"/>
+								placeholder="Unique userName" value="theju@3"
+								maxlength="20" required/>
 						</td>
 					</tr>
 					<tr>
@@ -50,7 +76,8 @@
 						</td>
 						<td>
 							<input id="password" type="password" name="password" size="20" 
-								required placeholder="Password" value="theju@3"/>
+								placeholder="Password" value="theju@3"
+								maxlength="20" required/>
 						</td>
 					</tr>	
 					<tr>

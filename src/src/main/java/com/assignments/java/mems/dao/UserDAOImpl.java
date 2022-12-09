@@ -5,7 +5,6 @@ package com.assignments.java.mems.dao;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
-import java.sql.SQLException;
 import java.sql.ResultSet;
 
 import com.assignments.java.mems.bo.UserBO;
@@ -19,22 +18,11 @@ public class UserDAOImpl implements UserDAO {
 
 	@Override
 	public int registerUser(UserBO userBO) 
-	throws SQLException
+	throws Exception
 	{
 		// 1. Obtain the DB Connection
 		
-		Connection conn = null;
-		
-		try {
-			conn = DBConnection.getConn();
-		} catch (Exception e) {
-			System.err.println("Exception while obtaining a connection");
-			System.err.println("Error Message : " + e.getMessage());
-			//TODO ONLY for Development Purposes, remove it in PROD
-			e.printStackTrace();
-			//TODO NOT Recommended. Have better alternatives.
-			System.exit(-1);
-		}
+		Connection conn = DBConnection.getConn();
 		
 		//2. Prepare the SQL Query and Statement Object
 		String sql = "INSERT INTO User (`FirstName`, " 
