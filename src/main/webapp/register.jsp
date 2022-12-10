@@ -5,9 +5,14 @@
 	<head>
 		<meta charset="UTF-8">
 		<title>MEMS | Registration</title>
+		<link rel="stylesheet" href="style.css"/>
 	</head>
 	<body>
-		<h1>Sign Up</h1>
+		<h1>Welcome to Mini Email Messaging System (MEMS)</h1>
+		<h2>Sign Up</h2>
+		<p>
+			Please fill in the following details to sign up.
+		</p>
 		<%!
 			boolean isError = false;
 			String firstName = "Thejaswini";
@@ -93,3 +98,4 @@
 		</form>
 	</body>
 </html>
+<%@include file="footer.jsp" %>
