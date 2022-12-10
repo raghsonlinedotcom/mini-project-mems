@@ -6,7 +6,7 @@
 		<div class="menu">
 			<a href="/MEMS">Home</a> &nbsp; | &nbsp;
 			<a href="Admin">Admin</a>&nbsp; | &nbsp;
-			<a href="profile.jsp">Profile</a>&nbsp; | &nbsp;
+			<a href="View">Profile</a>&nbsp; | &nbsp;
 			<a href="Inbox">Inbox</a>&nbsp; | &nbsp;
 			<a href="Compose">Compose</a>&nbsp; | &nbsp;
 			<a href="Logout">Logout</a>
@@ -15,8 +15,15 @@
 	} else {
 %>
 		<div class="menu">
-			<a href="register.jsp">Register</a>
+			<a href="register.jsp">Register</a>&nbsp; | &nbsp;
+			<a href="/MEMS">Home</a> &nbsp; | &nbsp;
+			<a href="Admin">Admin</a>&nbsp; | &nbsp;
+			<a href="View">Profile</a>&nbsp; | &nbsp;
+			<a href="Inbox">Inbox</a>&nbsp; | &nbsp;
+			<a href="Compose">Compose</a>&nbsp; | &nbsp;
+			<a href="Logout">Logout</a>			
 		</div>
 <%		
 	}
 %>
+		<hr/>
